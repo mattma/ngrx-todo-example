@@ -9,7 +9,7 @@ const initialValue: TodoState = [];
 export const todoReducer = (state = initialValue, action: Action): TodoState => {
   switch (action.type) {
     case TodoActions.ADD_TODO:
-      return [...state, action.payload];
+      return [...state, new Todo(action.payload)];
 
     default:
       return state;

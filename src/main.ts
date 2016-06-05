@@ -10,7 +10,7 @@ if (environment.production) {
 
 bootstrap(NgrxTodoAppComponent, [
   STORE_PROVIDERS,
-  EFFECTS_PROVIDERS,
+  // EFFECTS_PROVIDERS,
   ...ACTIONS_PROVIDERS
 ]);
 

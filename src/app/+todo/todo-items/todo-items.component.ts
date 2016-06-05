@@ -7,7 +7,7 @@ import { TodoState } from '../shared/reducers/todo.reducer';
   template: `
     <ul class="todo-list">
       <li *ngFor="let todo of todos">
-        {{todo}}
+        {{todo.text}}
       </li>
     </ul>
   `,
