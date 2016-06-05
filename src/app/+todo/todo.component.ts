@@ -13,6 +13,7 @@ import 'rxjs/add/operator/let';
   moduleId: module.id,
   selector: 'todo-app',
   directives: [TodoInputComponent, TodoItemsComponent],
+  providers: [TodoActions],
   template: `
     <section class="todoapp">
       <header class="header">

@@ -1,3 +1,2 @@
-export * from './providers';
-export * from './effects';
-export * from './actions';
+export * from './store.provider';
+export * from './effects.provider';

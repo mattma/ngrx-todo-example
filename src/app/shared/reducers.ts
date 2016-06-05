@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/Observable';
 /**
  * combineReducers is another useful metareducer that takes a map of reducer
  * functions and creates a new reducer that stores the gathers the values
