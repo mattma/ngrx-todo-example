@@ -7,8 +7,6 @@ import { TodoActions } from './shared/todo.action';
 import { TodoInputComponent } from './todo-input';
 import { TodoItemsComponent } from './todo-items';
 
-import 'rxjs/add/operator/let';
-
 @Component({
   moduleId: module.id,
   selector: 'todo-app',
