@@ -13,7 +13,8 @@ module.exports = function(defaults) {
       'rxjs/**/*.+(js|js.map)',
       '@angular/**/*.+(js|js.map)',
       '@ngrx/**/*.+(js|js.map)',
-      'ngrx-store-logger/dist/*.+(js|js.map)'
+      'ngrx-store-logger/dist/*.+(js|js.map)',
+      'cuid/dist/*.js'
     ]
   });
 };

@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {TodoInputComponent} from './todo-input';
-import {TodoItemsComponent} from './todo-items';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+
+import { AppState } from '../shared/reducers';
+import { TodoActions } from './shared/todo.action';
+import { TodoInputComponent } from './todo-input';
+import { TodoItemsComponent } from './todo-items';
+
+import 'rxjs/add/operator/let';
 
 @Component({
   moduleId: module.id,
@@ -10,20 +17,29 @@ import {TodoItemsComponent} from './todo-items';
     <section class="todoapp">
       <header class="header">
         <h1>todos</h1>
-        <todo-input></todo-input>
+        <todo-input (todo)="addTodo($event)"></todo-input>
       </header>
       <section class="main">
-        <todo-items></todo-items>
+        <todo-items [todos]="todos$ | async"></todo-items>
       </section>
     </section>
   `,
-  styles: []
+  styleUrls: ['./todo.component.css']
 })
-export class TodoComponent implements OnInit {
+export class TodoComponent {
+  todos$: Observable<any>;
 
-  constructor() {}
+  constructor(private store: Store<AppState>, private todoActions: TodoActions) {
+    this.todos$ = store.select(s => s.todos);
+  }
 
-  ngOnInit() {
+  addTodo(todo: string) {
+    /**
+     * All state updates are handled through dispatched actions in 'smart'
+     * components. This provides a clear, reproducible history of state
+     * updates and user interaction through the life of our application.
+     */
+    this.store.dispatch(this.todoActions.addTodo(todo));
   }
 
 }

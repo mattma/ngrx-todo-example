@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { TodoState } from '../shared/reducers/todo.reducer';
 
 @Component({
   moduleId: module.id,
@@ -13,9 +14,5 @@ import { Component } from '@angular/core';
   styles: []
 })
 export class TodoItemsComponent {
-  todos: Array<any>;
-
-  constructor() {
-    this.todos = [];
-  }
+  @Input() todos: TodoState;
 }

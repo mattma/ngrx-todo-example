@@ -4,18 +4,21 @@
 /** Map relative paths to URLs. */
 const map: any = {
   '@ngrx': 'vendor/@ngrx',
-  'ngrx-store-logger': 'vendor/ngrx-store-logger'
+  'ngrx-store-logger': 'vendor/ngrx-store-logger',
+  'cuid': 'vendor/cuid'
 };
 
 /** User packages configuration. */
 const packages: any = {
-  'ngrx-store-logger': {main: 'dist/index'}
+  'ngrx-store-logger': {main: 'dist/index'},
+  'cuid': {main: 'dist/browser-cuid'},
 };
 
 // loads up ngrx/store package
 const ngrxPkgs:string[] = [
   'store',
-  'core'
+  'core',
+  'effects'
 ];
 ngrxPkgs.forEach((pkg) => packages[`@ngrx/${pkg}`] = {main: 'index'});
 

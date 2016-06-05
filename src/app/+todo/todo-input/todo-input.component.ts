@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+// import { TodoService } from '../shared/todo.service';
 
 @Component({
   moduleId: module.id,
@@ -9,11 +11,17 @@ import { Component } from '@angular/core';
       placeholder="What needs to be done?"
       (keyup.enter)="addTodo(todo)"
       />
-  `,
-  styles: []
+  `
 })
 export class TodoInputComponent {
-  addTodo (todo) {
-    console.log('todo: ', todo);
+  @Output() todo: EventEmitter<string> = new EventEmitter();
+
+  addTodo (todo): void {
+    const todoValue = todo.value.trim();
+
+    if (todoValue.length > 0) {
+      this.todo.emit(todoValue);
+      todo.value = '';
+    }
   }
 }
