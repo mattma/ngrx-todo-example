@@ -1,10 +1,9 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-// import { TodoService } from '../shared/todo.service';
+import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   moduleId: module.id,
   selector: 'todo-input',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <input 
       class="new-todo" autofocus #todo

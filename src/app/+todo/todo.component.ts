@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
@@ -14,18 +14,19 @@ import 'rxjs/add/operator/let';
   selector: 'todo-app',
   directives: [TodoInputComponent, TodoItemsComponent],
   providers: [TodoActions],
+  encapsulation: ViewEncapsulation.None,
   template: `
-    <section class="todoapp">
-      <header class="header">
+    <div class="todoapp">
+      <div class="header">
         <h1>todos</h1>
         <todo-input (todo)="addTodo($event)"></todo-input>
-      </header>
-      <section class="main">
+      </div>
+      <div class="main">
         <todo-items [todos]="todos$ | async"></todo-items>
-      </section>
-    </section>
+      </div>
+    </div>
   `,
-  styleUrls: ['./todo.component.css']
+  styleUrls: ['todo.component.css']
 })
 export class TodoComponent {
   todos$: Observable<any>;
