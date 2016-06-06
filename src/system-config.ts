@@ -4,14 +4,12 @@
 /** Map relative paths to URLs. */
 const map: any = {
   '@ngrx': 'vendor/@ngrx',
-  'ngrx-store-logger': 'vendor/ngrx-store-logger',
-  'cuid': 'vendor/cuid'
+  'ngrx-store-logger': 'vendor/ngrx-store-logger'
 };
 
 /** User packages configuration. */
 const packages: any = {
-  'ngrx-store-logger': {main: 'dist/index'},
-  'cuid': {main: 'dist/browser-cuid'},
+  'ngrx-store-logger': {main: 'dist/index'}
 };
 
 // loads up ngrx/store package
