@@ -20,7 +20,12 @@ import { TodoItemsComponent } from './todo-items';
         <todo-input (todo)="addTodo($event)"></todo-input>
       </div>
       <div class="main">
-        <todo-items [todos]="todos$ | async"></todo-items>
+        <todo-items 
+          [todos]="todos$ | async"
+          (toggle)="onToggleTodo($event)"
+          (remove)="onRemoveTodo($event)"
+          (newTodoValue)="onNewTodoValue($event)"
+          ></todo-items>
       </div>
     </div>
   `,
@@ -42,4 +47,15 @@ export class TodoComponent {
     this.store.dispatch(this.todoActions.addTodo(todo));
   }
 
+  onToggleTodo(id: string) {
+
+  }
+
+  onRemoveTodo(id: string) {
+    console.log('id: ', id);
+  }
+
+  onNewTodoValue(todo: any) {
+
+  }
 }

@@ -46,6 +46,7 @@ const barrels: string[] = [
   'app/todo-input',
   'app/+todo/todo-input',
   'app/+todo/todo-items',
+  'app/+todo/todo-item',
   /** @cli-barrel */
 ];
 
