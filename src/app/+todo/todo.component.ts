@@ -48,7 +48,7 @@ export class TodoComponent {
   }
 
   onToggleTodo(id: string) {
-
+    this.store.dispatch(this.todoActions.toggleTodo(id));
   }
 
   onRemoveTodo(id: string) {

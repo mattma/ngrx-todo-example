@@ -38,9 +38,15 @@ export class TodoActions {
     };
   }
 
-  static EDIT_TODO: string = 'EDIT_TODO';
   static TOGGLE_TODO: string = 'TOGGLE_TODO';
+  toggleTodo (id: string) {
+    return {
+      type: TodoActions.TOGGLE_TODO,
+      payload: id
+    };
+  }
 
+  static EDIT_TODO: string = 'EDIT_TODO';
   static SET_CURRENT_FILTER: string = 'SET_CURRENT_FILTER';
   static STARTED_LETTER: string = 'STARTED_LETTER';
   static COMPLETE_ALL: string = 'COMPLETE_ALL';

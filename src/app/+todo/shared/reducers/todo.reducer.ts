@@ -14,6 +14,14 @@ export const todoReducer = (state: TodoState = initialValue, action: Action): To
     case TodoActions.REMOVE_TODO:
       return state.filter((todo: Todo) => todo.id !== action.payload);
 
+    case TodoActions.TOGGLE_TODO:
+      return state.map((todo: Todo) => {
+        if (todo.id === action.payload) {
+          todo.completed = !todo.completed;
+        }
+        return todo;
+      });
+
     default:
       return state;
   }
