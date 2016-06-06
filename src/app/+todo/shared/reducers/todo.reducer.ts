@@ -22,6 +22,14 @@ export const todoReducer = (state: TodoState = initialValue, action: Action): To
         return todo;
       });
 
+    case TodoActions.COMPLETE_ALL:
+      return state.map((todo: Todo) => {
+        if (todo.completed !== action.payload) {
+          todo.completed = action.payload;
+        }
+        return todo;
+      });
+
     default:
       return state;
   }

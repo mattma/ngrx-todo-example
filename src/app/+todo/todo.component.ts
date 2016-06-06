@@ -62,6 +62,6 @@ export class TodoComponent {
   }
 
   onSwitchToggle(isToggle: boolean) {
-    console.log('isToggle: ', isToggle);
+    this.store.dispatch(this.todoActions.toggleAllTodos(isToggle));
   }
 }

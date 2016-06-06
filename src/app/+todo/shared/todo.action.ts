@@ -46,9 +46,16 @@ export class TodoActions {
     };
   }
 
+  static COMPLETE_ALL: string = 'COMPLETE_ALL';
+  toggleAllTodos (isToggle: boolean) {
+    return {
+      type: TodoActions.COMPLETE_ALL,
+      payload: isToggle
+    };
+  }
+
   static EDIT_TODO: string = 'EDIT_TODO';
   static SET_CURRENT_FILTER: string = 'SET_CURRENT_FILTER';
   static STARTED_LETTER: string = 'STARTED_LETTER';
-  static COMPLETE_ALL: string = 'COMPLETE_ALL';
   static CLEAR_COMPLETED: string = 'CLEAR_COMPLETED';
 }
