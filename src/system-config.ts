@@ -18,7 +18,7 @@ const ngrxPkgs:string[] = [
   'core',
   'effects'
 ];
-ngrxPkgs.forEach((pkg) => packages[`@ngrx/${pkg}`] = {main: 'index'});
+ngrxPkgs.forEach((pkg) => packages[`@ngrx/${pkg}`] = {main: 'index', format: 'cjs'});
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
