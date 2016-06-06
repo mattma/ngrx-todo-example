@@ -1,9 +1,10 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Todo } from '../shared/todo.model';
 
 @Component({
   moduleId: module.id,
   selector: 'todo-item',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <li [ngClass]="{'completed': todo.completed}">
       <div class="view" *ngIf="!isEditing">

@@ -6,11 +6,12 @@ import { AppState } from '../shared/reducers';
 import { TodoActions } from './shared/todo.action';
 import { TodoInputComponent } from './todo-input';
 import { TodoItemsComponent } from './todo-items';
+import { SwitcherComponent } from './switcher';
 
 @Component({
   moduleId: module.id,
   selector: 'todo-app',
-  directives: [TodoInputComponent, TodoItemsComponent],
+  directives: [TodoInputComponent, TodoItemsComponent, SwitcherComponent],
   providers: [TodoActions],
   encapsulation: ViewEncapsulation.None,
   template: `
@@ -20,6 +21,7 @@ import { TodoItemsComponent } from './todo-items';
         <todo-input (todo)="addTodo($event)"></todo-input>
       </div>
       <div class="main">
+        <switcher (switchToggle)="onSwitchToggle($event)"></switcher>
         <todo-items 
           [todos]="todos$ | async"
           (toggle)="onToggleTodo($event)"
@@ -57,5 +59,9 @@ export class TodoComponent {
 
   onNewTodoValue(todo: any) {
 
+  }
+
+  onSwitchToggle(isToggle: boolean) {
+    console.log('isToggle: ', isToggle);
   }
 }
