@@ -52,7 +52,7 @@ export class TodoComponent {
   }
 
   onRemoveTodo(id: string) {
-    console.log('id: ', id);
+    this.store.dispatch(this.todoActions.removeTodo(id));
   }
 
   onNewTodoValue(todo: any) {

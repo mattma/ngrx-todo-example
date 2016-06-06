@@ -30,9 +30,17 @@ export class TodoActions {
     };
   }
 
+  static REMOVE_TODO: string = '[TODO] REMOVE_TODO';
+  removeTodo (id: string) {
+    return {
+      type: TodoActions.REMOVE_TODO,
+      payload: id
+    };
+  }
+
   static EDIT_TODO: string = 'EDIT_TODO';
   static TOGGLE_TODO: string = 'TOGGLE_TODO';
-  static REMOVE_TODO: string = 'REMOVE_TODO';
+
   static SET_CURRENT_FILTER: string = 'SET_CURRENT_FILTER';
   static STARTED_LETTER: string = 'STARTED_LETTER';
   static COMPLETE_ALL: string = 'COMPLETE_ALL';
