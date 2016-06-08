@@ -38,7 +38,7 @@ export class TodoActions {
     };
   }
 
-  static TOGGLE_TODO: string = 'TOGGLE_TODO';
+  static TOGGLE_TODO: string = '[TODO] TOGGLE_TODO';
   toggleTodo (id: string) {
     return {
       type: TodoActions.TOGGLE_TODO,
@@ -46,7 +46,7 @@ export class TodoActions {
     };
   }
 
-  static COMPLETE_ALL: string = 'COMPLETE_ALL';
+  static COMPLETE_ALL: string = '[TODO] COMPLETE_ALL';
   toggleAllTodos (isToggle: boolean) {
     return {
       type: TodoActions.COMPLETE_ALL,
