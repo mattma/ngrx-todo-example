@@ -1,17 +1,28 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { AppState } from '../shared/reducers';
+import {TodoState} from './shared/reducers/todo.reducer';
 import { TodoActions } from './shared/todo.action';
 import { TodoInputComponent } from './todo-input';
 import { TodoItemsComponent } from './todo-items';
 import { SwitcherComponent } from './switcher';
+import { StatusBarComponent } from './status-bar';
+
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/count';
 
 @Component({
   moduleId: module.id,
   selector: 'todo-app',
-  directives: [TodoInputComponent, TodoItemsComponent, SwitcherComponent],
+  directives: [
+    TodoInputComponent,
+    TodoItemsComponent,
+    SwitcherComponent,
+    StatusBarComponent
+  ],
   providers: [TodoActions],
   encapsulation: ViewEncapsulation.None,
   template: `
@@ -29,18 +40,35 @@ import { SwitcherComponent } from './switcher';
           (newTodoValue)="onNewTodoValue($event)"
           ></todo-items>
       </div>
+      <div class="footer">
+        <status-bar [remaining]="remaining"></status-bar>
+        <!--<filters></filters>-->
+        <!--<clear-completed></clear-completed>-->
+      </div>
     </div>
   `,
   styleUrls: ['todo.component.css']
 })
-export class TodoComponent {
-  todos$: Observable<any>;
+export class TodoComponent implements OnInit {
+  todos$: Observable<TodoState>;
 
-  constructor(private store: Store<AppState>, private todoActions: TodoActions) {
+  constructor (private store: Store<AppState>, private todoActions: TodoActions) {
     this.todos$ = store.select(s => s.todos);
   }
 
-  addTodo(todo: string) {
+  ngOnInit () {
+    console.log(this.remaining)
+  }
+
+  get remaining (): number {
+    return 0;
+    // return this.todos$
+    //   .filter(t => !t.completed)
+    //   .do(x => console.log(x))
+    //   .count();
+  }
+
+  addTodo (todo: string) {
     /**
      * All state updates are handled through dispatched actions in 'smart'
      * components. This provides a clear, reproducible history of state
@@ -49,19 +77,19 @@ export class TodoComponent {
     this.store.dispatch(this.todoActions.addTodo(todo));
   }
 
-  onToggleTodo(id: string) {
+  onToggleTodo (id: string) {
     this.store.dispatch(this.todoActions.toggleTodo(id));
   }
 
-  onRemoveTodo(id: string) {
+  onRemoveTodo (id: string) {
     this.store.dispatch(this.todoActions.removeTodo(id));
   }
 
-  onNewTodoValue(todo: any) {
+  onNewTodoValue (todo: any) {
 
   }
 
-  onSwitchToggle(isToggle: boolean) {
+  onSwitchToggle (isToggle: boolean) {
     this.store.dispatch(this.todoActions.toggleAllTodos(isToggle));
   }
 }
