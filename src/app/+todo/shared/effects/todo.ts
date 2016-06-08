@@ -7,14 +7,17 @@ import { TodoActions } from '../todo.action';
 import { Todo } from '../todo.model';
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class BookEffects {
-  constructor(
-    private updates$: StateUpdates<AppState>,
-    private todoActions: TodoActions
-  ) { }
+  constructor(private updates$: StateUpdates<AppState>) { }
 
+    // .map(query => console.log('query: ', query))
+    // .switchMap(query => this.googleBooks.searchBooks(query)
+    //   .map(books => this.bookActions.searchComplete(books))
+    //   .catch(() => Observable.of(this.bookActions.searchComplete([])))
+    // );
   /**
    * Effects offer a way to isolate and easily test side-effects within your
    * application. StateUpdates is an observable of the latest state and
@@ -28,12 +31,8 @@ export class BookEffects {
    * Official Docs: http://reactivex.io/rxjs/manual/overview.html#categories-of-operators
    * RxJS 5 Operators By Example: https://gist.github.com/btroncone/d6cf141d6f2c00dc6b35
    */
-  @Effect() todo$ = this.updates$
-    .whenAction(TodoActions.ADD_TODO)
-    .map<any>(toPayload);
-    // .map(query => console.log('query: ', query))
-    // .switchMap(query => this.googleBooks.searchBooks(query)
-    //   .map(books => this.bookActions.searchComplete(books))
-    //   .catch(() => Observable.of(this.bookActions.searchComplete([])))
-    // );
+  @Effect() toggleTodo$ = this.updates$
+    .whenAction(TodoActions.TOGGLE_TODO)
+    .map<string>(toPayload)
+    .do(query => console.log('query: ', query));
 }

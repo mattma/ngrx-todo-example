@@ -4,33 +4,31 @@ import { Todo } from '../shared/todo.model';
 @Component({
   moduleId: module.id,
   selector: 'todo-item',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <li [ngClass]="{'completed': todo.completed}">
-      <div class="view" *ngIf="!isEditing">
-        <input
-          class="toggle"
-          type="checkbox"
-          (change)="toggle.emit(todo.id)"
-          [checked]="todo.completed"
-        />
-        <label (dblclick)="toggleEditing.emit(true)">{{todo.text}}</label>
-        <button class="destroy" (click)="remove.emit(todo.id)"></button>
-      </div>
+    <div class="view" *ngIf="!isEditing">
       <input
-        type="text"
-        class="edit"
-        #editTodo
-        [style.display]="isEditing?'block':'none'"
-        [value]="todo.text"
-        (keyup.enter)="newTodoValue.emit({id: todo.id, text: editTodo.value})"
-        />
-    </li>
-  `,
-  styles: []
+        class="toggle"
+        type="checkbox"
+        (change)="toggle.emit(todo.id)"
+        [checked]="completed"
+      />
+      <label (dblclick)="toggleEditing.emit(true)">{{todo.text}}</label>
+      <button class="destroy" (click)="remove.emit(todo.id)"></button>
+    </div>
+    <input
+      type="text"
+      class="edit"
+      #editTodo
+      [style.display]="isEditing?'block':'none'"
+      [value]="todo.text"
+      (keyup.enter)="newTodoValue.emit({id: todo.id, text: editTodo.value})"
+      />
+  `
 })
 export class TodoItemComponent {
   @Input() todo: Todo;
+  @Input() completed: boolean;
   @Input() isEditing: boolean;
   @Output() toggle: EventEmitter<string> = new EventEmitter();
   @Output() remove: EventEmitter<string> = new EventEmitter();

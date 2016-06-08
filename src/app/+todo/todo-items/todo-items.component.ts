@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { TodoState } from '../shared/reducers/todo.reducer';
 import { TodoItemComponent } from '../todo-item';
 import { Todo } from '../shared/todo.model';
@@ -7,11 +7,13 @@ import { Todo } from '../shared/todo.model';
   moduleId: module.id,
   selector: 'todo-items',
   directives: [TodoItemComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ul class="todo-list">
-      <li *ngFor="let todo of todos">
+      <li *ngFor="let todo of todos" [ngClass]="{'completed': todo.completed}">
         <todo-item
           [todo]="todo"
+          [completed]="todo.completed"
           [isEditing]="isEditing"
           (toggleEditing)="toggleEditing($event)"
           (toggle)="toggle.emit($event)"

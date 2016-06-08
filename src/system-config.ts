@@ -9,16 +9,16 @@ const map: any = {
 
 /** User packages configuration. */
 const packages: any = {
-  'ngrx-store-logger': {main: 'dist/index'}
+  'ngrx-store-logger': { main: 'dist/index' }
 };
 
 // loads up ngrx/store package
-const ngrxPkgs:string[] = [
+const ngrxPkgs: string[] = [
   'store',
   'core',
   'effects'
 ];
-ngrxPkgs.forEach((pkg) => packages[`@ngrx/${pkg}`] = {main: 'index', format: 'cjs'});
+ngrxPkgs.forEach((pkg) => packages[`@ngrx/${pkg}`] = { main: 'index', format: 'cjs' });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
