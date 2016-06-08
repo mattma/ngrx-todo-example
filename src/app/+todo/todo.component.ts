@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
@@ -11,8 +11,8 @@ import { SwitcherComponent } from './switcher';
 import { StatusBarComponent } from './status-bar';
 
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/count';
 
 @Component({
   moduleId: module.id,
@@ -49,23 +49,19 @@ import 'rxjs/add/operator/count';
   `,
   styleUrls: ['todo.component.css']
 })
-export class TodoComponent implements OnInit {
-  todos$: Observable<TodoState>;
+export class TodoComponent {
+  todos$: Observable<any>;
 
   constructor (private store: Store<AppState>, private todoActions: TodoActions) {
     this.todos$ = store.select(s => s.todos);
   }
 
-  ngOnInit () {
-    console.log(this.remaining)
-  }
-
   get remaining (): number {
     return 0;
-    // return this.todos$
-    //   .filter(t => !t.completed)
-    //   .do(x => console.log(x))
-    //   .count();
+    // this.todos$
+    //   .subscribe(todos => {
+    //     return todos.filter(todo => !todo.completed).length;
+    //   });
   }
 
   addTodo (todo: string) {
