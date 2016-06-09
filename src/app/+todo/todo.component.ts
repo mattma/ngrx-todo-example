@@ -6,6 +6,7 @@ import { AppState } from '../shared/reducers';
 import { TodoState } from './shared/reducers/todo.reducer';
 import { Todo } from './shared/todo.model';
 import { TodoActions } from './shared/actions/todo.action';
+import { FilterActions } from './shared/actions/filter.action';
 import { TodoInputComponent } from './todo-input';
 import { TodoItemsComponent } from './todo-items';
 import { SwitcherComponent } from './switcher';
@@ -24,7 +25,7 @@ import { TodoFilterComponent } from './todo-filter';
     ClearCompletedComponent,
     TodoFilterComponent
   ],
-  providers: [TodoActions],
+  providers: [TodoActions, FilterActions],
   encapsulation: ViewEncapsulation.None,
   template: `
     <div class="todoapp">
@@ -37,6 +38,7 @@ import { TodoFilterComponent } from './todo-filter';
         <switcher (switchToggle)="onSwitchToggle($event)"></switcher>
         <todo-items 
           [todos]="todos$ | async"
+          [filter]="filter$ | async"
           (toggle)="onToggleTodo($event)"
           (remove)="onRemoveTodo($event)"
           (newTodoValue)="onNewTodoValue($event)"
@@ -57,7 +59,11 @@ export class TodoComponent {
 
   remaining: number;
 
-  constructor (private store: Store<AppState>, private todoActions: TodoActions) {
+  constructor (
+    private store: Store<AppState>,
+    private todoActions: TodoActions,
+    private filterActions: FilterActions
+  ) {
     this.todos$ = store.select(s => s.todos);
     this.filter$ = store.select(s => s.filter);
 
@@ -71,12 +77,12 @@ export class TodoComponent {
       );
   }
 
+  /**
+   * All state updates are handled through dispatched actions in 'smart'
+   * components. This provides a clear, reproducible history of state
+   * updates and user interaction through the life of our application.
+   */
   addTodo (todo: string) {
-    /**
-     * All state updates are handled through dispatched actions in 'smart'
-     * components. This provides a clear, reproducible history of state
-     * updates and user interaction through the life of our application.
-     */
     this.store.dispatch(this.todoActions.addTodo(todo));
   }
 
@@ -101,6 +107,6 @@ export class TodoComponent {
   }
 
   setFilter (filter: string) {
-    console.log('filter: ', filter);
+    this.store.dispatch(this.filterActions.setFilter(filter));
   }
 }

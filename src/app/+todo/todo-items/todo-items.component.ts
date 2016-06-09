@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { TodoState } from '../shared/reducers/todo.reducer';
 import { TodoItemComponent } from '../todo-item';
+import { Filter } from '../shared/pipes/filter.pipe';
 import { Todo } from '../shared/todo.model';
 
 @Component({
@@ -8,9 +9,10 @@ import { Todo } from '../shared/todo.model';
   selector: 'todo-items',
   directives: [TodoItemComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  pipes: [Filter],
   template: `
     <ul class="todo-list">
-      <li *ngFor="let todo of todos" [ngClass]="{'completed': todo.completed}">
+      <li *ngFor="let todo of todos | filter: filter" [ngClass]="{'completed': todo.completed}">
         <todo-item
           [todo]="todo"
           [completed]="todo.completed"
@@ -23,11 +25,11 @@ import { Todo } from '../shared/todo.model';
         </todo-item>
       </li>
     </ul>
-  `,
-  styles: []
+  `
 })
 export class TodoItemsComponent {
   @Input() todos: TodoState;
+  @Input() filter: string;
   isEditing: boolean;
   @Output() toggle: EventEmitter<string> = new EventEmitter();
   @Output() remove: EventEmitter<string> = new EventEmitter();

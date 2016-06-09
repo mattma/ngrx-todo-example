@@ -22,5 +22,5 @@ import { Routes, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router';
   {path: '/todo', component: TodoComponent}
 ])
 export class NgrxTodoAppComponent {
-  title = 'ngrx-todo works!';
+  title = 'Angular2';
 }
