@@ -7,8 +7,11 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
   template: `
     <ul class="filters">
       <li *ngFor="let f of filters">
-        <a [ngClass]="{'selected': active, 'inactive': !active}"
-          (click)="setFilter.emit()">
+        <a [ngClass]="{
+          'selected': filter === f.filter, 
+          'inactive': filter !== f.filter
+        }"
+          (click)="setFilter.emit(f.filter)">
           {{f.text}}
         </a>
       </li>
@@ -18,7 +21,6 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 export class TodoFilterComponent {
   @Input() filter: string;
   @Output() setFilter: EventEmitter<string> = new EventEmitter();
-  active: boolean;
   filters: Array<any>;
 
   constructor () {

@@ -44,7 +44,7 @@ import { TodoFilterComponent } from './todo-filter';
       </div>
       <div class="footer">
         <status-bar [remaining]="remaining"></status-bar>
-        <todo-filter [filter]="SHOW_ALL" (setFilter)="setFilter($event)"></todo-filter>
+        <todo-filter [filter]="filter$ | async" (setFilter)="setFilter($event)"></todo-filter>
         <clear-completed (clear)="clearCompleted()"></clear-completed>
       </div>
     </div>
@@ -53,10 +53,14 @@ import { TodoFilterComponent } from './todo-filter';
 })
 export class TodoComponent {
   todos$: Observable<TodoState>;
+  filter$: Observable<string>;
+
   remaining: number;
 
   constructor (private store: Store<AppState>, private todoActions: TodoActions) {
     this.todos$ = store.select(s => s.todos);
+    this.filter$ = store.select(s => s.filter);
+
     this.updateRemaining();
   }
 

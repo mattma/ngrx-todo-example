@@ -31,7 +31,7 @@ import { storeLogger } from 'ngrx-store-logger';
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
-import { todoReducer, TodoState } from '../+todo/shared/reducers/todo.reducer';
+import { todoReducer, TodoState, filterReducer } from '../+todo/shared/reducers/index';
 
 /**
  * each reducer like a table in a database. This means
@@ -39,6 +39,7 @@ import { todoReducer, TodoState } from '../+todo/shared/reducers/todo.reducer';
  */
 export interface AppState {
   todos: TodoState;
+  filter: string;
 }
 
 /**
@@ -49,7 +50,8 @@ export interface AppState {
  * the result from right to left.
  */
 export default compose(storeLogger(), combineReducers)({
-  todos: todoReducer
+  todos: todoReducer,
+  filter: filterReducer
 });
 
 
