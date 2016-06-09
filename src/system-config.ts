@@ -48,6 +48,7 @@ const barrels: string[] = [
   'app/+todo/switcher',
   'app/+todo/status-bar',
   'app/+todo/clear-completed',
+  'app/+todo/todo-filter',
   /** @cli-barrel */
 ];
 

@@ -11,6 +11,7 @@ import { TodoItemsComponent } from './todo-items';
 import { SwitcherComponent } from './switcher';
 import { StatusBarComponent } from './status-bar';
 import { ClearCompletedComponent } from './clear-completed';
+import { TodoFilterComponent } from './todo-filter';
 
 @Component({
   moduleId: module.id,
@@ -20,7 +21,8 @@ import { ClearCompletedComponent } from './clear-completed';
     TodoItemsComponent,
     SwitcherComponent,
     StatusBarComponent,
-    ClearCompletedComponent
+    ClearCompletedComponent,
+    TodoFilterComponent
   ],
   providers: [TodoActions],
   encapsulation: ViewEncapsulation.None,
@@ -28,6 +30,7 @@ import { ClearCompletedComponent } from './clear-completed';
     <div class="todoapp">
       <div class="header">
         <h1>todos</h1>
+        <!--<started-search></started-search>-->
         <todo-input (todo)="addTodo($event)"></todo-input>
       </div>
       <div class="main">
@@ -41,7 +44,7 @@ import { ClearCompletedComponent } from './clear-completed';
       </div>
       <div class="footer">
         <status-bar [remaining]="remaining"></status-bar>
-        <!--<filters></filters>-->
+        <todo-filter [filter]="SHOW_ALL" (setFilter)="setFilter($event)"></todo-filter>
         <clear-completed (clear)="clearCompleted()"></clear-completed>
       </div>
     </div>
@@ -91,5 +94,9 @@ export class TodoComponent {
 
   clearCompleted () {
     this.store.dispatch(this.todoActions.clearCompleted());
+  }
+
+  setFilter (filter: string) {
+    console.log('filter: ', filter);
   }
 }
