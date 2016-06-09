@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { AppState } from '../shared/reducers';
 import { TodoState } from './shared/reducers/todo.reducer';
 import { Todo } from './shared/todo.model';
-import { TodoActions } from './shared/todo.action';
+import { TodoActions } from './shared/actions/todo.action';
 import { TodoInputComponent } from './todo-input';
 import { TodoItemsComponent } from './todo-items';
 import { SwitcherComponent } from './switcher';

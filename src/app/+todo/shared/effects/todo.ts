@@ -3,7 +3,7 @@ import { Effect, StateUpdates, toPayload } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 
 import { AppState } from '../../../shared/reducers';
-import { TodoActions } from '../todo.action';
+import { TodoActions } from '../actions/todo.action';
 import { Todo } from '../todo.model';
 
 import 'rxjs/add/operator/map';

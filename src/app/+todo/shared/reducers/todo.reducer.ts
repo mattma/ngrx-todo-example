@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Todo } from '../todo.model';
-import { TodoActions } from '../todo.action';
+import { TodoActions } from '../actions/todo.action';
 
 export interface TodoState extends Array<Todo> {};
 
