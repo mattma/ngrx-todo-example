@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { AppState } from '../shared/reducers';
 import { TodoState } from './shared/reducers/todo.reducer';
 import { Todo } from './shared/todo.model';
-import { TodoActions } from './shared/actions/todo.action';
-import { FilterActions } from './shared/actions/filter.action';
+import { TodoActions, FilterActions } from './shared/actions/index';
+
 import { TodoInputComponent } from './todo-input';
 import { TodoItemsComponent } from './todo-items';
 import { SwitcherComponent } from './switcher';
@@ -59,13 +59,11 @@ export class TodoComponent {
 
   remaining: number;
 
-  constructor (
-    private store: Store<AppState>,
-    private todoActions: TodoActions,
-    private filterActions: FilterActions
-  ) {
-    this.todos$ = store.select(s => s.todos);
-    this.filter$ = store.select(s => s.filter);
+  constructor (private store: Store<AppState>,
+               private todoActions: TodoActions,
+               private filterActions: FilterActions) {
+    this.todos$ = store.select<TodoState>(s => s.todos);
+    this.filter$ = store.select<string>(s => s.filter);
 
     this.updateRemaining();
   }
