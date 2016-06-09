@@ -3,16 +3,13 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { AppState } from '../shared/reducers';
-import {TodoState} from './shared/reducers/todo.reducer';
+import { TodoState } from './shared/reducers/todo.reducer';
+import { Todo } from './shared/todo.model';
 import { TodoActions } from './shared/todo.action';
 import { TodoInputComponent } from './todo-input';
 import { TodoItemsComponent } from './todo-items';
 import { SwitcherComponent } from './switcher';
 import { StatusBarComponent } from './status-bar';
-
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
 
 @Component({
   moduleId: module.id,
@@ -50,18 +47,19 @@ import 'rxjs/add/operator/do';
   styleUrls: ['todo.component.css']
 })
 export class TodoComponent {
-  todos$: Observable<any>;
+  todos$: Observable<TodoState>;
+  remaining: number;
 
   constructor (private store: Store<AppState>, private todoActions: TodoActions) {
     this.todos$ = store.select(s => s.todos);
+    this.updateRemaining();
   }
 
-  get remaining (): number {
-    return 0;
-    // this.todos$
-    //   .subscribe(todos => {
-    //     return todos.filter(todo => !todo.completed).length;
-    //   });
+  updateRemaining (): void {
+    this.todos$
+      .subscribe((todos: TodoState) =>
+        this.remaining = todos.filter((todo: Todo) => !todo.completed).length || 0
+      );
   }
 
   addTodo (todo: string) {
