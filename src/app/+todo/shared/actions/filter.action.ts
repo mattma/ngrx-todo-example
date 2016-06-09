@@ -3,24 +3,11 @@ import { Action } from '@ngrx/store';
 
 @Injectable()
 export class FilterActions {
-  static SHOW_ALL: string = '[FILTER] SHOW_ALL';
-  showAll (): Action {
+  static CURRENT_FILTER: string = '[FILTER] CURRENT_FILTER';
+  setFilter (filter: string): Action {
     return {
-      type: FilterActions.SHOW_ALL
-    };
-  }
-
-  static SHOW_ACTIVE: string = '[FILTER] SHOW_ACTIVE';
-  showActive (): Action {
-    return {
-      type: FilterActions.SHOW_ACTIVE
-    };
-  }
-
-  static SHOW_COMPLETED: string = '[FILTER] SHOW_COMPLETED';
-  showCompleted (): Action {
-    return {
-      type: FilterActions.SHOW_COMPLETED
+      type: FilterActions.CURRENT_FILTER,
+      payload: filter
     };
   }
 }
