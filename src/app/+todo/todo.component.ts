@@ -10,6 +10,7 @@ import { TodoInputComponent } from './todo-input';
 import { TodoItemsComponent } from './todo-items';
 import { SwitcherComponent } from './switcher';
 import { StatusBarComponent } from './status-bar';
+import { ClearCompletedComponent } from './clear-completed';
 
 @Component({
   moduleId: module.id,
@@ -18,7 +19,8 @@ import { StatusBarComponent } from './status-bar';
     TodoInputComponent,
     TodoItemsComponent,
     SwitcherComponent,
-    StatusBarComponent
+    StatusBarComponent,
+    ClearCompletedComponent
   ],
   providers: [TodoActions],
   encapsulation: ViewEncapsulation.None,
@@ -40,7 +42,7 @@ import { StatusBarComponent } from './status-bar';
       <div class="footer">
         <status-bar [remaining]="remaining"></status-bar>
         <!--<filters></filters>-->
-        <!--<clear-completed></clear-completed>-->
+        <clear-completed (clear)="clearCompleted()"></clear-completed>
       </div>
     </div>
   `,
@@ -85,5 +87,9 @@ export class TodoComponent {
 
   onSwitchToggle (isToggle: boolean) {
     this.store.dispatch(this.todoActions.toggleAllTodos(isToggle));
+  }
+
+  clearCompleted () {
+    this.store.dispatch(this.todoActions.clearCompleted());
   }
 }

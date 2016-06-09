@@ -54,8 +54,14 @@ export class TodoActions {
     };
   }
 
+  static CLEAR_COMPLETED: string = '[TODO] CLEAR_COMPLETED';
+  clearCompleted () {
+    return {
+      type: TodoActions.CLEAR_COMPLETED
+    };
+  }
+
   static EDIT_TODO: string = 'EDIT_TODO';
   static SET_CURRENT_FILTER: string = 'SET_CURRENT_FILTER';
   static STARTED_LETTER: string = 'STARTED_LETTER';
-  static CLEAR_COMPLETED: string = 'CLEAR_COMPLETED';
 }
